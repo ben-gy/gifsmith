@@ -74,8 +74,9 @@ it through the same encoder — a zero-dependency way to see the output without 
 
 - The static site bundle, hash-pinned by the GitHub Pages deploy.
 - The TLS chain between you and GitHub Pages.
-- No third-party scripts, fonts, analytics or trackers run at all. A strict Content-Security-
-  Policy (`connect-src 'self'`) means the page can't make network calls beyond loading itself.
+- No third-party fonts or trackers; your video never leaves the device. A strict Content-Security-
+  Policy allows only the app itself plus the cookie-less Cloudflare Web Analytics beacon
+  (anonymous page-view counts — no personal data, no cross-site tracking).
 
 ## stack
 
@@ -85,8 +86,9 @@ it through the same encoder — a zero-dependency way to see the output without 
 - Vitest for unit tests
 - GitHub Pages for hosting, deployed via GitHub Actions
 
-No runtime dependencies beyond gifenc. No analytics, no cookies, no third-party fonts, no
-telemetry.
+No runtime dependencies beyond gifenc. No cookies, no fingerprinting, no third-party fonts.
+The only analytics is Cloudflare Web Analytics — anonymous, cookie-less page-view counts;
+no personal data, no cross-site tracking.
 
 ## local development
 
