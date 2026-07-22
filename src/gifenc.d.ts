@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+// Copyright (C) 2026 Ben Richardson — https://benrichardson.dev
+// Additional terms under AGPL-3.0 section 7(b) apply; see ADDITIONAL-TERMS.md.
 declare module 'gifenc' {
   export type Palette = number[][];
   export type PaletteFormat = 'rgb565' | 'rgb444' | 'rgba4444';
