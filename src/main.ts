@@ -9,11 +9,6 @@
  * (main thread) with the encode worker (background thread).
  */
 
-// feedback:begin (managed by hub/scripts/feedback/backfill.mjs)
-import { mountFeedback } from './feedback';
-mountFeedback();
-// feedback:end
-
 import { registerSW } from 'virtual:pwa-register';
 import { emit, mountEventDrawer } from './eventlog';
 import { initGlossary } from './glossary';
