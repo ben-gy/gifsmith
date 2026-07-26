@@ -10,26 +10,38 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: [
+        'favicon.svg',
+        'favicon-32.png',
+        'favicon-16.png',
+        'apple-touch-icon.png',
+        'robots.txt',
+      ],
       manifest: {
         name: 'gifsmith — video to GIF in your browser',
         short_name: 'gifsmith',
         description:
           'Turn any video into a GIF, entirely in your browser. No uploads, works offline.',
+        id: '/',
+        start_url: '/',
+        scope: '/',
         theme_color: '#7c3aed',
         background_color: '#fbfaff',
         display: 'standalone',
+        orientation: 'any',
+        categories: ['photo', 'video', 'utilities'],
         icons: [
-          {
-            src: 'favicon.svg',
-            sizes: 'any',
-            type: 'image/svg+xml',
-            purpose: 'any',
-          },
+          { src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: 'icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'apple-touch-icon.png', sizes: '180x180', type: 'image/png', purpose: 'any' },
+          { src: 'favicon.svg', sizes: 'any', type: 'image/svg+xml', purpose: 'any' },
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,wasm,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,wasm,woff2,png,jpg}'],
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+        navigateFallback: 'index.html',
       },
     }),
   ],
