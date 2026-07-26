@@ -299,7 +299,45 @@ a:hover {
   margin-top: 1.25rem;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+.sample-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  background: var(--bg-surface);
+  color: var(--accent);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.sample-link:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.sample-link:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.sample-link .icon {
+  color: var(--accent);
+  display: inline-flex;
+}
+
+.sample-link .icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 /* ───────────────── buttons ───────────────── */

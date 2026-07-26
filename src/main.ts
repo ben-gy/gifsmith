@@ -147,6 +147,16 @@ function renderIdle(): void {
   wireDropzone(dz);
 
   const actions = h('div', { class: 'idle-actions' });
+
+  const sampleBtn = h(
+    'button',
+    { type: 'button', class: 'sample-link', id: 'sample-btn' },
+    iconSpark(),
+    h('span', {}, 'Try a sample video'),
+  );
+  sampleBtn.addEventListener('click', () => void loadSample(sampleBtn as HTMLButtonElement));
+  actions.appendChild(sampleBtn);
+
   if (canMakeDemo()) {
     const demoBtn = h(
       'button',
@@ -239,6 +249,27 @@ async function handleFile(file: File): Promise<void> {
   } catch (err) {
     fail('Could not load that video', err);
     renderIdle();
+  }
+}
+
+/** Load the bundled sample clip through the exact same path a real upload uses. */
+async function loadSample(btn: HTMLButtonElement): Promise<void> {
+  if (state.worker) return;
+  btn.disabled = true;
+  const label = btn.querySelector('span');
+  const original = label?.textContent ?? 'Try a sample video';
+  if (label) label.textContent = 'Loading sample…';
+  emit('decode', 'info', 'Loading a sample video on your device');
+  try {
+    const res = await fetch('samples/demo.mp4');
+    if (!res.ok) throw new Error(`sample fetch ${res.status}`);
+    const blob = await res.blob();
+    // Route through handleFile — the identical ingestion a dropped/picked file uses.
+    await handleFile(new File([blob], 'sample.mp4', { type: blob.type || 'video/mp4' }));
+  } catch (err) {
+    fail('Could not load the sample video', err);
+    btn.disabled = false;
+    if (label) label.textContent = original;
   }
 }
 
